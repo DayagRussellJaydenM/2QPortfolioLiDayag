@@ -1,3 +1,29 @@
+function getShows() {
+  const cat = showCat.value;
+  let rowString =
+    "<tr><th>Key</th><th>Title</th><th>Casts</th><th>Year</th><th>Rating / Score</th></tr>";
+
+  let count = 0;
+
+  for (let key in netflixShows) {
+    if (cat === "All" || netflixShows[key].category === cat) {
+      rowString += `
+        <tr>
+          <td>${key}</td>
+          <td>${netflixShows[key].title}</td>
+          <td>${netflixShows[key].cast.join(", ")}</td>
+          <td>${netflixShows[key].year}</td>
+          <td>${netflixShows[key].ratingScore()}</td>
+        </tr>`;
+      count++;
+    }
+  }
+
+  results.innerHTML = rowString;
+  countElem.textContent = `Total Shows: ${count}`;
+}
+
+
 function delShows() {
   const cat = showCat.value;
 
@@ -119,29 +145,4 @@ const netflixShows = {
     }
   }
 };
-
-function getShows() {
-  const cat = showCat.value;
-  let rowString =
-    "<tr><th>Key</th><th>Title</th><th>Casts</th><th>Year</th><th>Rating / Score</th></tr>";
-
-  let count = 0;
-
-  for (let key in netflixShows) {
-    if (cat === "All" || netflixShows[key].category === cat) {
-      rowString += `
-        <tr>
-          <td>${key}</td>
-          <td>${netflixShows[key].title}</td>
-          <td>${netflixShows[key].cast.join(", ")}</td>
-          <td>${netflixShows[key].year}</td>
-          <td>${netflixShows[key].ratingScore()}</td>
-        </tr>`;
-      count++;
-    }
-  }
-
-  results.innerHTML = rowString;
-  countElem.textContent = `Total Shows: ${count}`;
-}
 
