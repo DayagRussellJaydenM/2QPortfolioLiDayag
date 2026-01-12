@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Custom Confirmation</title>
+    <style>
+        *{
+            font-family:'Courier New', Courier, monospace
+        }
+        fieldset{
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+     
+<body>
+    <form action="action" method="post">
+    <fieldset>
+        <fieldset>
+            <legend>Primary Information</legend><br>
+            <label>Student ID</label><br>
+            <input type="number" name="stuid" id="stuid" required><br><br>
+            <label>Full Name</label><br>
+            <input type="text" name="fname" id="fname" required><br><br>
+            <label>Birthday</label><br>
+            <input type="date" name="bday" id="bday" required><br><br>
+            <label>Email Address</label><br>
+            <input type="email" name="eaddress" id="eaddress" required><br><br>
+            
+        </fieldset>
+
+        <fieldset>
+            <legend>Additional Information</legend>
+            <label>Mobile Phone</label><br>
+            <input type="text" name="phone" id="phone" required><br><br>
+            <label>Grade Level</label><br>
+            <select name="gradelevel" id="gradelevel" required>
+                <option value="g7">Grade 7</option>
+                <option value="g8">Grade 8</option>
+                <option value="g9">Grade 9</option>
+                <option value="g10">Grade 10</option>
+                <option value="g11">Grade 11</option>
+                <option value="g12">Grade 12</option>
+
+            </select>
+            <br><br>
+            <label>Preferred Organization / Club</label><br>
+            <input type="radio" name="club" id="Alianti" required>
+            <label>Alianti</label>
+            <input type="radio" name="club" id="HimigAgham" required>
+            <label>Himig Agham</label>
+            <input type="radio" name="club" id="Sagala" required>
+            <label>Sagala</label>
+            <input type="radio" name="club" id="Labuyo" required>
+            <label>Labuyo</label>
+            <input type="radio" name="club" id="Pallastro" required>
+            <label>Pallastro</label>
+            <br><br>
+
+            
+        </fieldset> 
+        <br>
+        <label>Why do you want to join</label><br>
+        <textarea name="joinpurpose" id="why" placeholder="Type your answer here..." required></textarea><br><br>
+
+        <input type="submit" value="Submit">
+
+        <input type="reset" value="Clear">
+    </fieldset>
+    </form>
+
+    <script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        let confirmSubmit = confirm("Are you sure you want to submit this form?");
+        if (!confirmSubmit) {
+            event.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>
+
+    </script>
+</body>
+</html>
