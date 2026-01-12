@@ -6,82 +6,95 @@
     <title>Form with Custom Confirmation</title>
     <style>
         *{
-            font-family:'Courier New', Courier, monospace
+            font-family:'Courier New', Courier, monospace;
         }
         fieldset{
             background-color: antiquewhite;
         }
+        input:focus, textarea:focus, select:focus{
+            background-color: lightyellow;
+            border: 2px solid blue;
+        }
+        .empty{
+            border: 2px solid rgba(255, 0, 0, 0.504);
+        }
     </style>
 </head>
-     
 <body>
-    <form action="action" method="post">
+    <form id="Form" action="submit" method="post" onsubmit="return confirm('Are you sure you want to submit this form?');" onreset="return confirm('Are you sure you want to clear all the data?');">
     <fieldset>
         <fieldset>
             <legend>Primary Information</legend><br>
-            <label>Student ID</label><br>
-            <input type="number" name="stuid" id="stuid" required><br><br>
-            <label>Full Name</label><br>
-            <input type="text" name="fname" id="fname" required><br><br>
-            <label>Birthday</label><br>
-            <input type="date" name="bday" id="bday" required><br><br>
-            <label>Email Address</label><br>
-            <input type="email" name="eaddress" id="eaddress" required><br><br>
-            
+            <label>Student ID
+                <input type="number" name="stuid" id="stuid" required onblur="checkEmpty(this)">
+            </label><br><br>
+
+            <label>Full Name
+                <input type="text" name="fname" id="fname" required onblur="checkEmpty(this)">
+            </label><br><br>
+
+            <label>Birthday
+                <input type="date" name="bday" id="bday" required onblur="checkEmpty(this)">
+            </label><br><br>
+
+            <label>Email Address
+                <input type="email" name="eaddress" id="eaddress" required onblur="checkEmpty(this)">
+            </label><br><br>
         </fieldset>
-
-        <fieldset>
-            <legend>Additional Information</legend>
-            <label>Mobile Phone</label><br>
-            <input type="text" name="phone" id="phone" required><br><br>
-            <label>Grade Level</label><br>
-            <select name="gradelevel" id="gradelevel" required>
-                <option value="g7">Grade 7</option>
-                <option value="g8">Grade 8</option>
-                <option value="g9">Grade 9</option>
-                <option value="g10">Grade 10</option>
-                <option value="g11">Grade 11</option>
-                <option value="g12">Grade 12</option>
-
-            </select>
-            <br><br>
-            <label>Preferred Organization / Club</label><br>
-            <input type="radio" name="club" id="Alianti" required>
-            <label>Alianti</label>
-            <input type="radio" name="club" id="HimigAgham" required>
-            <label>Himig Agham</label>
-            <input type="radio" name="club" id="Sagala" required>
-            <label>Sagala</label>
-            <input type="radio" name="club" id="Labuyo" required>
-            <label>Labuyo</label>
-            <input type="radio" name="club" id="Pallastro" required>
-            <label>Pallastro</label>
-            <br><br>
-
-            
-        </fieldset> 
         <br>
-        <label>Why do you want to join</label><br>
-        <textarea name="joinpurpose" id="why" placeholder="Type your answer here..." required></textarea><br><br>
+        <fieldset>
+            <legend>Secondary Information</legend><br>
+            <label>Mobile Phone
+                <input type="text" name="phone" id="phone" required onblur="checkEmpty(this)">
+            </label><br><br>
 
-        <input type="submit" value="Submit">
+            <label>Grade Level
+                <select name="gradelevel" id="gradelevel" required onblur="checkEmpty(this)">
+                    <option value="">Select Grade</option>
+                    <option value="7">Grade 7</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9">Grade 9</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                </select>
+            </label><br><br>
 
-        <input type="reset" value="Clear">
+            <label>Intern / Extern
+                <select name="internExtern" id="internExtern" required onblur="checkEmpty(this)">
+                    <option value="">Select Type</option>
+                    <option value="intern">Intern</option>
+                    <option value="extern">Extern</option>
+                </select>
+            </label><br><br>
+            <label>Preferred Organization / Club
+                <select name="club" id="club" required onblur="checkEmpty(this)">
+                    <option value="">Select Club</option>
+                    <option value="alianti">Alianti</option>
+                    <option value="himigAgham">Himig Agham</option>
+                    <option value="sagala">Sagala</option>
+                    <option value="labuyo">Labuyo</option>
+                    <option value="pallastro">Pallastro</option>
+                </select>
+            </label><br><br>
+            <label>Why do you want to join <br>
+                <textarea name="joinpurpose" id="why" placeholder="Type your answer here..." required onblur="checkEmpty(this)"></textarea>
+            </label><br><br>
+        </fieldset>
+        <br>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Clear">
     </fieldset>
     </form>
 
     <script>
-    document.getElementById("myForm").addEventListener("submit", function(event) {
-        let confirmSubmit = confirm("Are you sure you want to submit this form?");
-        if (!confirmSubmit) {
-            event.preventDefault();
+        function checkEmpty(el){
+            if(el.value.trim() === ""){
+                el.classList.add("empty");
+            } else {
+                el.classList.remove("empty");
+            }
         }
-    });
-</script>
-
-</body>
-</html>
-
     </script>
 </body>
 </html>
