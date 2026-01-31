@@ -60,12 +60,9 @@
                 </select>
             </label><br><br>
 
-            <label>Intern / Extern
-                <select name="internExtern" id="internExtern" required onblur="checkEmpty(this)">
-                    <option value="">Select Type</option>
-                    <option value="intern">Intern</option>
-                    <option value="extern">Extern</option>
-                </select>
+            <label>Intern or Extern <br>
+                <input type="radio" name="internExtern" id="Intern" required onblur="checkEmpty(this)"> Intern 
+                <input type="radio" name="internExtern" id="Extern" required onblur="checkEmpty(this)"> Extern 
             </label><br><br>
             <label>Preferred Organization / Club
                 <select name="club" id="club" required onblur="checkEmpty(this)">
