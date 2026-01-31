@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <title>View Signups</title>
 <style>
-     *{
-            font-family:monospace;
-        }
+    *{
+        font-family:monospace;
+    }
     table,th,td{
         border:1px solid black;
         border-collapse:collapse;
@@ -43,20 +43,25 @@ Select Your Club
 
 <script>
 
-    let signups = JSON.parse(localStorage.getItem("signups"));
+let signups = JSON.parse(localStorage.getItem("signups"));
 
-    function display(){
+function capitalizeWords(str){
+    return str.replace(/\b\w/g, c => c.toUpperCase());
+}
 
-        let out = document.getElementById("output");
-        let club = filter.value;
+function display(){
 
-        if(!signups || signups.length == 0){
-            out.innerHTML = "No signups saved.";
-            total.innerHTML = "";
-            return;
-        }
+    let out = document.getElementById("output");
+    let club = filter.value;
 
-    let list = club == "ALL" ? signups : signups.filter(s => s.club == club);
+    if(!signups || signups.length == 0){
+        out.innerHTML = "No signups saved.";
+        total.innerHTML = "";
+        return;
+    }
+
+    let list = (!club || club === "ALL") ? signups : signups.filter(s => s.club.toLowerCase() === club.toLowerCase());
+
 
     if(list.length == 0){
         out.innerHTML = "No Sign Ups for the club.";
@@ -68,13 +73,13 @@ Select Your Club
 
     list.forEach(s=>{
         html += `<tr>
-        <td>${s.club}</td>
+        <td>${capitalizeWords(s.club)}</td>
         <td>${s.stuid}</td>
-        <td>${s.fname}</td>
+        <td>${capitalizeWords(s.fname)}</td>
         <td>${s.gradelevel}</td>
         <td>${s.eaddress}</td>
         <td>${s.phone}</td>
-        <td>${s.internExtern}</td>
+        <td>${capitalizeWords(s.internExtern)}</td>
         </tr>`;
     });
 
