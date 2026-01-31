@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Signups</title>
+<style>
+     *{
+            font-family:monospace;
+        }
+    table,th,td{
+        border:1px solid black;
+        border-collapse:collapse;
+        padding:5px;
+    }
+
+    th{
+        background-color:blue;
+        color:white;
+    }   
+</style>
+</head>
+
+<body>
+
+<h2>Show List of Studens Who Signed-Up</h2>
+
+<a href="Q3_3GLiDayag.html">Back to Sign-Up</a> <br>
+Select Your Club
+<select id="filter" onchange="display()">
+    <option value="ALL">-- select an option --</option>
+    <option value="alianti">Alianti</option>
+    <option value="himigAgham">Himig Agham</option>
+    <option value="sagala">Sagala</option>
+    <option value="labuyo">Labuyo</option>
+    <option value="pallastro">Pallastro</option>
+</select>
+
+<p id="total"></p>
+
+<div id="output"></div>
+
+<br>
+
+<script>
+
+    let signups = JSON.parse(localStorage.getItem("signups"));
+
+    function display(){
+
+        let out = document.getElementById("output");
+        let club = filter.value;
+
+        if(!signups || signups.length == 0){
+            out.innerHTML = "No signups saved.";
+            total.innerHTML = "";
+            return;
+        }
+
+    let list = club == "ALL" ? signups : signups.filter(s => s.club == club);
+
+    if(list.length == 0){
+        out.innerHTML = "No Sign Ups for the club.";
+        total.innerHTML = "Total: 0";
+        return;
+    }
+
+    let html = "<table><tr><th>Club</th><th>ID</th><th>Fullname</th><th>Grade</th><th>Email</th><th>Mobile</th><th>Intern|Extern</th></tr>";
+
+    list.forEach(s=>{
+        html += `<tr>
+        <td>${s.club}</td>
+        <td>${s.stuid}</td>
+        <td>${s.fname}</td>
+        <td>${s.gradelevel}</td>
+        <td>${s.eaddress}</td>
+        <td>${s.phone}</td>
+        <td>${s.internExtern}</td>
+        </tr>`;
+    });
+
+    html += "</table>";
+
+    out.innerHTML = html;
+    total.innerHTML = "Total Signups: " + list.length;
+
+}
+
+display();
+
+</script>
+
+</body>
+</html>

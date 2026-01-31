@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Custom Confirmation</title>
+    <style>
+        *{
+            font-family:'Courier New', Courier, monospace;
+        }
+        fieldset{
+            background-color: antiquewhite;
+        }
+        input:focus, textarea:focus, select:focus{
+            background-color: lightyellow;
+            border: 2px solid blue;
+        }
+        .empty{
+            border: 2px solid rgba(255, 0, 0, 0.504);
+        }
+    </style>
+</head>
+<body>
+    <form id="Form" method="post" onreset="return confirm('Are you sure you want to clear all the data?');">
+    <fieldset>
+        <fieldset>
+            <legend>Primary Information</legend><br>
+            <label>Student ID
+                <input type="number" name="stuid" id="stuid" required onblur="checkEmpty(this)">
+            </label><br><br>
+
+            <label>Full Name
+                <input type="text" name="fname" id="fname" required onblur="checkEmpty(this)">
+            </label><br><br>
+
+            <label>Birthday
+                <input type="date" name="bday" id="bday" required onblur="checkEmpty(this)">
+            </label><br><br>
+
+            <label>Email Address
+                <input type="email" name="eaddress" id="eaddress" required onblur="checkEmpty(this)">
+            </label><br><br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Secondary Information</legend><br>
+            <label>Mobile Phone
+                <input type="text" name="phone" id="phone" required onblur="checkEmpty(this)">
+            </label><br><br>
+
+            <label>Grade Level
+                <select name="gradelevel" id="gradelevel" required onblur="checkEmpty(this)">
+                    <option value="">Select Grade</option>
+                    <option value="7">Grade 7</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9">Grade 9</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                </select>
+            </label><br><br>
+
+            <label>Intern / Extern
+                <select name="internExtern" id="internExtern" required onblur="checkEmpty(this)">
+                    <option value="">Select Type</option>
+                    <option value="intern">Intern</option>
+                    <option value="extern">Extern</option>
+                </select>
+            </label><br><br>
+            <label>Preferred Organization / Club
+                <select name="club" id="club" required onblur="checkEmpty(this)">
+                    <option value="">Select Club</option>
+                    <option value="alianti">Alianti</option>
+                    <option value="himigAgham">Himig Agham</option>
+                    <option value="sagala">Sagala</option>
+                    <option value="labuyo">Labuyo</option>
+                    <option value="pallastro">Pallastro</option>
+                </select>
+            </label><br><br>
+            <label>Why do you want to join <br>
+                <textarea name="joinpurpose" id="why" placeholder="Type your answer here..." required onblur="checkEmpty(this)"></textarea>
+            </label><br><br>
+        </fieldset>
+        <br>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Clear">
+            <button type="button" onclick="location.href='Q3_3GSignupsLiDayag.html'">View Signups</button>
+    </fieldset>
+    </form>
+
+    <script>
+        function checkEmpty(el){
+            if(el.value.trim() === ""){
+                el.classList.add("empty");
+            } else {
+                el.classList.remove("empty");
+            }
+        }
+
+        document.getElementById("Form").addEventListener("submit", function(e){
+            e.preventDefault();
+
+            if(!confirm('Are you sure you want to submit this form?')) return;
+
+            let signups = JSON.parse(localStorage.getItem("signups")) || [];
+
+            let student = {
+                stuid: stuid.value,
+                fname: fname.value,
+                bday: bday.value,
+                eaddress: eaddress.value,
+                phone: phone.value,
+                gradelevel: gradelevel.value,
+                internExtern: internExtern.value,
+                club: club.value,
+                joinpurpose: why.value
+            };
+
+            signups.push(student);
+
+            localStorage.setItem("signups", JSON.stringify(signups));
+
+            alert("Signup Saved!");
+
+            this.reset();
+        });
+    </script>
+</body>
+</html>
